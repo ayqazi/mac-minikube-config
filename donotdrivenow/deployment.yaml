@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: 'donotdrivenow'
-          image: 'ghcr.io/ayqazi/donotdrivenow:ci-proto'
+          image: 'kustomize-managed-image-name'
           ports:
             - containerPort: 8000
           envFrom:
