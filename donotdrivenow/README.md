@@ -1,4 +1,6 @@
-# PostgreSQL instance used for experimentation. Do not run in production!
+# `donotdrivenow` app
+
+## DB setup
 
 Before creating this service, database connection details must be configured. A user and database owned by that user
 should be created in the PostgreSQL instance created by `platform/db`. The database URI containing that user's username
@@ -13,3 +15,11 @@ DB_URI: postgresql+asyncpg://username:password@postgres/database_name
 ```
 
 Instructions for managing Kubernetes secrets are in the root README.md.
+
+## Use with Kustomize
+
+Update the image in deployment.yaml with:
+
+```shell
+kustomize edit set image kustomize-managed-image-name=x.org/repo/name:newtag
+```
