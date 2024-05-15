@@ -6,3 +6,4 @@ resources:
 images:
 - name: kustomize-managed-image-name
   newName: ghcr.io/ayqazi/donotdrivenow
+  newTag: c490c38c72d33475fd23490af72431b7716e4fba
