@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: donotdrivenow
+  labels:
+    app: donotdrivenow
+spec:
+  type: NodePort
+  ports:
+    - port: 8000
+  selector:
+    app: donotdrivenow

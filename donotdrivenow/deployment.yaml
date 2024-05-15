@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 'donotdrivenow'
+spec:
+  selector:
+    matchLabels:
+      app: 'donotdrivenow'
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: 'donotdrivenow'
+    spec:
+      containers:
+        - name: 'donotdrivenow'
+          image: 'ghcr.io/ayqazi/donotdrivenow:ci-proto'
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: 'secure-donotdrivenow'
