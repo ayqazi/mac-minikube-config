@@ -46,7 +46,7 @@ Then commit and push the `kustomization.yaml` file.
 It is allowed to dynamically change the deployed `dev` version of an ArgoCD application. Here is how:
 
 ```shell
-argocd app set [APP]-dev --kustomize-image=ghcr.io/[ACCOUNT]/[REPO]:[REVISION]
+argocd app set [APP]-dev --kustomize-image image-name-in-manifest=[HOST_AND_ACCOUNT]/[REPO]:[REVISION]
 argocd app sync [APP]-dev
 ```
 
