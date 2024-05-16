@@ -52,4 +52,10 @@ argocd app sync [APP]-dev
 
 This is a convenient way of deploying a different version to a dev branch for testing.
 
+Unset with:
+
+```shell
+argocd app unset donotdrivenow-dev --kustomize-image kustomize-managed-image-name
+```
+
 In all other cases, commit the change to the repo.
