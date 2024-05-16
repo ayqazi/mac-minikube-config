@@ -1,8 +1,13 @@
+# DEV
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- service.yaml
-- deployment.yaml
+- ../base
+nameSuffix: -dev
+labels:
+- pairs:
+    app: donotdrivenow-dev
+  includeSelectors: true
 images:
 - name: kustomize-managed-image-name
   newName: ghcr.io/ayqazi/donotdrivenow
