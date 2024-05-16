@@ -1,0 +1,14 @@
+# STAGE
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../base
+nameSuffix: -stage
+labels:
+- pairs:
+    app: donotdrivenow-stage
+  includeSelectors: true
+images:
+- name: kustomize-managed-image-name
+  newName: ghcr.io/ayqazi/donotdrivenow
+  newTag: 87b3707e39ce3df6261c9746d7fc830a73451ef9
