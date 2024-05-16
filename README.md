@@ -30,3 +30,26 @@ kubectl apply -f /tmp/k8s.secret.yaml
 # Will display newly created secret
 kubectl get secrets/name-of-secret -o yaml
 ```
+
+## Deploy a new version of an application
+
+Go into the application directory, and run:
+
+```shell
+kustomize edit set image kustomize-managed-image-name='ghcr.io/[ACCOUNT]/[REPO]:[REVISION]'
+```
+
+Then commit and push the `kustomization.yaml` file.
+
+## Override deployed image using parameter overrides in ArgoCD
+
+It is allowed to dynamically change the deployed `dev` version of an ArgoCD application. Here is how:
+
+```shell
+argocd app set [APP]-dev --kustomize-image=ghcr.io/[ACCOUNT]/[REPO]:[REVISION]
+argocd app sync [APP]-dev
+```
+
+This is a convenient way of deploying a different version to a dev branch for testing.
+
+In all other cases, commit the change to the repo.
