@@ -11,4 +11,4 @@ labels:
 images:
 - name: kustomize-managed-image-name
   newName: ghcr.io/ayqazi/donotdrivenow
-  newTag: 87b3707e39ce3df6261c9746d7fc830a73451ef9
+  newTag: stage
