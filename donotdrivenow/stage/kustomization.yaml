@@ -5,10 +5,10 @@ resources:
 - ../base
 nameSuffix: -stage
 labels:
-- pairs:
+- includeSelectors: true
+  pairs:
     app: donotdrivenow-stage
-  includeSelectors: true
 images:
 - name: kustomize-managed-image-name
   newName: ghcr.io/ayqazi/donotdrivenow
-  newTag: 87b3707e39ce3df6261c9746d7fc830a73451ef9
+  newTag: 0bae316d4a1598da78b46e444fb8ee0dfcef7ce0
