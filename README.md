@@ -1,7 +1,7 @@
 # mac-minikube-config
 
-Holds the Kubernetes manifests to set up a minikube cluster. Designed to be synced with ArgoCD running in the same
-cluster.
+Holds the Kubernetes manifests to set up the services on a local minikube cluster. This allows playing around and
+learning allows in a cheap and safe manner. Designed to be synced with ArgoCD running in the same cluster.
 
 Use the CLI or UI to create a new ArgoCD Application for each directory with manifests in it.
 
