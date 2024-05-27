@@ -32,3 +32,7 @@ createdb -O <USERNAME> <DBNAME>
 ```
 
 You can also create a separate user/DB for every environment of a service.
+
+## NOTE
+
+As this is a playground/test service, files are not persisted anywhere. If the container dies, the data disappears.
