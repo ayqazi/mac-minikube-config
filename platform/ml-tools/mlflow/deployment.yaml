@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow
+  labels:
+    app: mlflow
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: mlflow
+  template:
+    metadata:
+      labels:
+        app: mlflow
+    spec:
+      containers:
+      - name: mlflow
+        image: 'ghcr.io/mlflow/mlflow:v2.13.0'
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
+        command: [ '/bin/sh' ]
+        args:
+        - '-c'
+        - "pip install --quiet psycopg2-binary &&
+          mlflow ui --host 0.0.0.0 --port 5000 --workers 1
+          --backend-store-uri '$(BACKEND_STORE_URI)'
+          --artifacts-destination /data/mlflow/artifacts
+          --default-artifact-root http://localhost:5000/api/2.0/mlflow-artifacts/artifacts/experiments"
+        envFrom:
+        - secretRef:
+            name: mlflow
+        volumeMounts:
+        - mountPath: '/data/mlflow'
+          name: mlflow-data
+      volumes:
+      - name: mlflow-data
+        hostPath:
+          path: '/data/mlflow'

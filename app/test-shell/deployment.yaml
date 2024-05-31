@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 'test-shell'
+spec:
+  selector:
+    matchLabels:
+      app: 'test-shell'
+  replicas: 1
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      labels:
+        app: 'test-shell'
+    spec:
+      containers:
+      - name: 'primary'
+        image: 'ubuntu:24.04'
+        command: [ 'sleep' ]
+        args: [ 'infinity' ]
