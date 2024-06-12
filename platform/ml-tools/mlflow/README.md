@@ -15,14 +15,14 @@ This assumes an in-cluster PostgreSQL DB called `mlflow` with user `mlflow`.
 
 Check the top-level README for how to manage k8s secrets.
 
-### Model Registry
+### Model Registry and Files
 
-The model registry directly mounts `/data/mlflow/artifacts` from the node as `artifacts`. This works fine on
-minikube, but won't work so well in a real environment so do not imitate it if serving real users.
+The model registry is configured to store artifacts in `/srv/mlflow/artifacts`, which is mounted in the pods from the
+same path on the host. This works well on Minikube which is expected to mount a local directory as `/srv`, thus allowing
+the artifacts to persist across restarts/rebuilds of Minikube.
 
-Some setup is required for `/data/mlflow/artifacts` which can be achieved by logging into the minikube node:
+This works fine on Minikube for experimenting and learning, but is not a production-ready solution for the real world.
 
-```shell
-minikube ssh
-sudo mkdir -p /data/mlflow/artifacts
-```
+### Testing
+
+[Test it and create test data by running this Python script that trains and logs a model](https://gist.github.com/ayqazi/beb5cea5dafc768a4522797105c9f72f)

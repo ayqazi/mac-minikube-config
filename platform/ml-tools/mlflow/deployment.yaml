@@ -15,6 +15,11 @@ spec:
       labels:
         app: mlflow
     spec:
+      restartPolicy: Always
+      volumes:
+      - name: 'mlflow-artifacts'
+        persistentVolumeClaim:
+          claimName: 'mlflow-artifacts-claim'
       containers:
       - name: mlflow
         image: 'ghcr.io/mlflow/mlflow:v2.13.0'
@@ -22,20 +27,17 @@ spec:
         ports:
         - containerPort: 5000
         command: [ '/bin/sh' ]
+        volumeMounts:
+        - mountPath: '/srv/mlflow/artifacts'
+          name: 'mlflow-artifacts'
         args:
         - '-c'
         - "pip install --quiet psycopg2-binary &&
           mlflow ui --host 0.0.0.0 --port 5000 --workers 1
           --backend-store-uri '$(BACKEND_STORE_URI)'
-          --artifacts-destination /data/mlflow/artifacts
-          --default-artifact-root http://localhost:5000/api/2.0/mlflow-artifacts/artifacts/experiments"
+          --serve-artifacts
+          --default-artifact-root mlflow-artifacts:/
+          --artifacts-destination /srv/mlflow/artifacts"
         envFrom:
         - secretRef:
             name: mlflow
-        volumeMounts:
-        - mountPath: '/data/mlflow'
-          name: mlflow-data
-      volumes:
-      - name: mlflow-data
-        hostPath:
-          path: '/data/mlflow'
