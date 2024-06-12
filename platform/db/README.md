@@ -5,6 +5,12 @@
 Requires a secret called `postgres-setup` in the namespace, with a key `POSTGRES_PASSWORD`. Instructions for managing
 Kubernetes secrets are in the root README.md
 
+## Files
+
+The service is configured to serve files from `/srv/postgresql/data`. The intention here is for minikube to mount `/srv`
+to a local filesystem path at startup, thereby allowing the postgresql data files to persist between
+restarts/recreations of the minikube cluster.
+
 ## Connecting
 
 Port forward to the instance with:

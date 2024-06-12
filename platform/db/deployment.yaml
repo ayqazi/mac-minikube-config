@@ -12,12 +12,23 @@ spec:
       labels:
         app: postgres
     spec:
+      restartPolicy: Always
+      volumes:
+      - name: 'postgres-data'
+        persistentVolumeClaim:
+          claimName: 'postgres-data-claim'
       containers:
       - name: postgres
         image: 'postgres:16'
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5432
+        volumeMounts:
+        - mountPath: '/srv/postgresql/data'
+          name: 'postgres-data'
+        env:
+        - name: 'PGDATA'
+          value: '/srv/postgresql/data'
         envFrom:
         - secretRef:
             name: 'postgres-setup'
