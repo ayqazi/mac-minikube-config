@@ -13,11 +13,11 @@ spec:
         app: postgres
     spec:
       containers:
-        - name: postgres
-          image: 'postgres:16'
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 5432
-          envFrom:
-            - secretRef:
-                name: 'postgres-setup'
+      - name: postgres
+        image: 'postgres:16'
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5432
+        envFrom:
+        - secretRef:
+            name: 'postgres-setup'
